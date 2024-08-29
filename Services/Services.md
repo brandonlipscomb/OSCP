@@ -1,5 +1,24 @@
-# SSH (22)
+# FTP (21)
+## Connection
+```bash
+$ ftp <IP>
+```
+## Commands 
+- ls
+- get [FILE]
+- mget [FILE] [FILE]
+- put [FILE]
+- exit
 
+# SSH (22)
+## General 
+```bash
+$ ssh <USER>@<IP>
+```
+## Options 
+```bash
+-p <PORT>
+```
 # SMB (139,445)
 ## SMB Shares Enumeration
 ```bash
