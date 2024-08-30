@@ -34,7 +34,32 @@ $ smbclient  \\\\<IP>\\<SHARE>
 - **get** <FILE>: download file to attacking device
 - **cd**: change directory
 - **put** <FILE>: upload file to target device
- 
+
+# MySQL (3306)
+## Connection 
+```bash
+$ mysql -u <username> -p -h <ip> -P <port>
+```
+```bash
+$ mysql -u <username> -p -h <ip> -P <port> --skip-ssl
+```
+## Commands
+### Show All Databases
+```bash
+show databases;
+```
+### Select Database
+```bash
+use <table>;
+```
+### Show Tables in Database
+```bash
+show tables;
+```
+### Display Table
+```bash
+select * from <table>;
+```
 # RDP (3389)
 ## Enumeration
 ### Automatic
