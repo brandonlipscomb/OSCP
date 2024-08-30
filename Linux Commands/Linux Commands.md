@@ -5,6 +5,18 @@
 file */{.,}*
 ```		
 ## Filtering Files
+### Name
+```bash
+find / -name "<name>" 2>/dev/null
+```
+### Ex. Flags
+```bash
+find / -name "*flag*" 2>/dev/null
+```
+### Owned by Root w/ the SUID Bit Set
+```bash
+find / -perm -4000 -user root -type f 2>/dev/null
+```
 ### ASCII Text
 ```bash
 file */{.,}* | grep ASCII
