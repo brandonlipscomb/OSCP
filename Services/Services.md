@@ -9,6 +9,10 @@ $ ftp <IP>
 - mget [FILE] [FILE]
 - put [FILE]
 - exit
+## Exploits
+vsftpd 2.3.4 
+- CVE-2011-2523 -> exploit/unix/ftp/vsftpd_234_backdoor (Metasploit)
+	- Backdoor on port 6200
 
 # SSH (22)
 ## General 
@@ -21,6 +25,9 @@ $ ssh <USER>@<IP>
 ```
 # SMB (139,445)
 ## SMB Shares Enumeration
+```bash
+$ smbmap -H <IP>
+```
 ```bash
 $ smbclient -L \\<IP>
 ```
