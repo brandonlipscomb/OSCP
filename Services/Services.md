@@ -51,6 +51,11 @@ use exploit/multi/samba/usermap_script
 set RHOSTS
 set LHOST
 ```
+# MQTT (1883)
+Message Queuing Telemetry Transport 
+
+
+
 # MySQL (3306)
 ## Connection 
 ```bash
@@ -121,6 +126,11 @@ You can exploit this vulnerability using Metasploit:
 ```bash
 use exploit/unix/misc/distcc_exec
 ```
+# AMQP (5672)
+Advanced Message Queuing Protocol
+
+# STOMP (61613, 61616)
+Streaming Text Oriented Messaging Protocol
 
 
 # Mystery Port
