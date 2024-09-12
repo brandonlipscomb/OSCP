@@ -16,6 +16,8 @@ find / -name "*flag*" 2>/dev/null
 ### Owned by Root w/ the SUID Bit Set
 ```bash
 find / -perm -4000 -user root -type f 2>/dev/null
+```
+```bash
 find / -perm -u=s -type f 2>/dev/null
 ```
 
