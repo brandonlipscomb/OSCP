@@ -20,7 +20,10 @@ find / -perm -4000 -user root -type f 2>/dev/null
 ```bash
 find / -perm -u=s -type f 2>/dev/null
 ```
-
+### Finding the string password in log files
+```bash
+grep -R -e 'password' /var/log/ 2>/dev/null
+```
 ### ASCII Text
 ```bash
 file */{.,}* | grep ASCII
