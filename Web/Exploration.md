@@ -45,6 +45,8 @@ admin:' or 1=1;--
 ```bash
 sqlmap -r login.req --batch --dbs --level=3 --risk=3
 ```
+### Forgot Password
+See if you can validate email addresses.
 > [!Caution]
 > Running a high risk factor could negatively impact the server
 ## Searchsploit
