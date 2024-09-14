@@ -6,5 +6,5 @@ df<CHAR>
 ```
 ### Excluding the CHAR
 ```vim
-df<CHAR>
+dt<CHAR>
 ```
