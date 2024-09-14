@@ -25,6 +25,9 @@ The copyright at the bottom of the page typically indicates when the website was
 Look for a scanner for the CMS that the website was created with.
 - **WordPress**: wpscan
 - **Magento**: magescan
+```bash
+php magescan.phar scan:all http://IP/
+```
 
 ## Common Files
 - **index.php**: tells you if it is a php website
