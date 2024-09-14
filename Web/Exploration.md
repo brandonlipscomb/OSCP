@@ -15,8 +15,8 @@ Websites around shopping
 ## Check URL's
 Click around the website and see how the folders are organized
 > [!NOTE] 
-> Check what the home folder is (Ex. index.php).
-> This could be an indictation that Apache Mod Read Write was misconfigured.
+> Check what the home folder is (Ex. index.php). \
+> Index.php/folders are common in MVC frameworks like Codeigniter and Laravel
 ## Copyright 
 The copyright at the bottom of the page typically indicates when the website was last updated. If you see an old copyright, the website will typically have old software.
 > [!NOTE] 
