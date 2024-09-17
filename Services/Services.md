@@ -1,8 +1,11 @@
 # FTP (21)
+FTP (File Transfer Protocol) is a standard network protocol used to transfer files between a client and a server over a TCP/IP network. FTP is designed for the transfer of files between computers on a network. It allows users to upload, download, delete, and manage files on a remote server.
 ## Connection
 ```bash
-$ ftp <IP>
+$ ftp <USER>@<IP>
 ```
+>[!NOTE]
+> If Anonymous FTP login allowed, use anonymous as user
 ## Commands 
 - ls
 - get [FILE]
@@ -30,8 +33,18 @@ telnet <IP> <PORT>
 ```
 >[!NOTE]
 >This service has been replaced by SSH (22) due to lack of encryption (Telnet transmitts data in plaintext).
-
-# SMB (139,445)
+# SMB (137,138,139,445)
+Originally designed to operate on NetBIOS over TCP/IP (NBT) and uses port 139 for session services port 138 for datagram services, and 137 for name services.
+## SMB 1.0 Name Services (137)
+## SMB 1.0 Datagram Services (138)
+## SMB 1.0 Session Services (139)
+## SMB 2.0+ (445)
+Direct SMB over TCP
+## Implementations
+- **CIFS** (Common Internet File System): Microsoft's implementation of the SMB protocol
+- **Samba**: An open source SMB implementation highly popular in Linux/Unix/MacOS
+- **NQ** (YNQ,jNQ,NQ storage): SMB implementation developed by Visuality Systems
+- **Fusion File Share**: Formerly known as Tuxera SMB, it is a proprietary implementation of Samba by Tuxera Inc.
 ## SMB Shares Enumeration
 ```bash
 $ smbmap -H <IP>
