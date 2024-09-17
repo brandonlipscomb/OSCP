@@ -42,6 +42,8 @@ Originally designed to operate on NetBIOS over TCP/IP (NBT) and uses port 139 fo
 Direct SMB over TCP
 ## Implementations
 - **CIFS** (Common Internet File System): Microsoft's implementation of the SMB protocol
+	- Ex. **microsoft-ds** (Microsoft Directory Services)
+ 		- Refers to the Diectory Services component of Active Directory, but it also encompasses services for file sharing and network resouce management.
 - **Samba**: An open source SMB implementation highly popular in Linux/Unix/MacOS
 - **NQ** (YNQ,jNQ,NQ storage): SMB implementation developed by Visuality Systems
 - **Fusion File Share**: Formerly known as Tuxera SMB, it is a proprietary implementation of Samba by Tuxera Inc.
