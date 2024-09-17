@@ -23,6 +23,14 @@ $ ssh <USER>@<IP>
 ```bash
 -p <PORT>
 ```
+# Telnet (23)
+Telnet is a network protocol that allows a user to communicate with a remote device over a TCP/IP network. Originally designed for remote login to devices and systems over a network. It enables users to execute commands on a remote machine as if they were physically present.
+```bash
+telnet <IP> <PORT> 
+```
+>[!NOTE]
+>This service has been replaced by SSH (22) due to lack of encryption (Telnet transmitts data in plaintext).
+
 # SMB (139,445)
 ## SMB Shares Enumeration
 ```bash
