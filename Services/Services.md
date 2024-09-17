@@ -56,30 +56,35 @@ Message Queuing Telemetry Transport
 
 
 
-# MySQL (3306)
-## Connection 
+# MariaDB (3306)
+To connect to MariaDB, one can use the command mysql
+## Display help
 ```bash
-$ mysql -u <username> -p -h <ip> -P <port>
+mysql --help
 ```
+## Connect to Database (Passwordless)
 ```bash
-$ mysql -u <username> -p -h <ip> -P <port> --skip-ssl
+mysql -h <TARGET_IP> -u root [--skip-ssl] [-P <PORT>]
 ```
 ## Commands
-### Show All Databases
-```bash
-show databases;
+**Prints out the databases we can access**
+```MariaDB
+SHOW databases;
 ```
-### Select Database
-```bash
-use <table>;
+>[!NOTE]
+> There are three default databases: **information_schema**, **mysql**, and **performance_schema**
+
+**Select Database**
+```MariaDB
+USE <DATABASE>;          
 ```
-### Show Tables in Database
-```bash
-show tables;
+**Prints out the available tables inside the current database**
+```MariaDB
+SHOW tables;
 ```
-### Display Table
-```bash
-select * from <table>;
+**Prints out all the data from the table {table_name}**
+```MariaDB
+SELECT * FROM <TABLE>;
 ```
 # RDP (3389)
 ## Enumeration
@@ -128,6 +133,15 @@ use exploit/unix/misc/distcc_exec
 ```
 # AMQP (5672)
 Advanced Message Queuing Protocol
+
+# Windows Remote Management (WinRM) using HTTP (5672)
+WinRM is a Microsoft protocol that allows for remote management of Windows machines.
+## Ex: Microsoft HTTPAPI httpd
+Microsoft HTTPAPI (HTTP API) is a component of Windows that provides the underlying infrastructure for handling HTTP requests and responses. When referring to "httpd 2.0" in this context, it generally indicates a web server that uses HTTPAPI to handle web requests.
+## Usage
+```bash
+evil-winrm -i <IP> -u <USER> -p <PASSWORD>
+```
 
 # STOMP (61613, 61616)
 Streaming Text Oriented Messaging Protocol
