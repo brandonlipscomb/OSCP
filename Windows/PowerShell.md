@@ -46,3 +46,8 @@ Get-Command <Verb>-*
 ```powershell
 Get-Command *-<Noun>
 ```
+# Commands
+## Find all files of a certain extension
+```powershell
+Get-ChildItem -Path "C:/" -Filter *<.EXTENSION> -Recurse
+```
