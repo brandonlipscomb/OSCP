@@ -17,3 +17,5 @@ gobuster dir --url http://IP/ --wordlist=/usr/share/wordlists/dirbuster/director
 ```bash
 gobuster vhost -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1million-5000.txt -u http://DOMAIN --append-domain
 ```
+>[!NOTE]
+>Any subdomains that are found will need to be added to /etc/hosts before they can be reached
