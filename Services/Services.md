@@ -1,5 +1,13 @@
 # FTP (21)
 FTP (File Transfer Protocol) is a standard network protocol used to transfer files between a client and a server over a TCP/IP network. FTP is designed for the transfer of files between computers on a network. It allows users to upload, download, delete, and manage files on a remote server.
+## Replacement 
+The main concern with FTP is that it is a very old and slow protocol. FTP is a protocol 
+used for copying entire files over the network from a remote server. In many cases, there is a need to 
+transfer only some changes made to a few files and not to transfer every file every single time. For these 
+scenarios, the **rsync** protocol is generally preferred.
+
+The changes that need to get transfered are called deltas. Using deltas to update files is an extremely 
+efficient way to reduce the required bandwidth for the transfer as well as the required time for the transfer to complete. [^3]
 ## Connection
 ```bash
 $ ftp <USER>@<IP>
@@ -74,6 +82,34 @@ use exploit/multi/samba/usermap_script
 set RHOSTS
 set LHOST
 ```
+# Rsync (873)
+Rsync is a fast and extraordinarily versatile file copying tool. It can copy locally, 
+to/from another host over any remote shell, or to/from a remote rsync daemon. It offers 
+a large number of options that control every aspect of its behavior and permit very 
+flexible specification of the set of files to be copied. It is famous for its delta
+transfer algorithm, which reduces the amount of data sent over the network by sending 
+only the differences between the source files and the existing files in the 
+destination. Rsync is widely used for backups and mirroring and as an improved copy 
+command for everyday use.
+## Connection
+### General Syntax
+```bash
+rsync [OPTIONS] … [USER@]<HOST>::<SRC> [DEST]
+```
+### List all Directories Available to Anonymous
+```bash
+rsync --list-only <IP>::
+```
+### List all Directories Avaiable to a User
+```bash
+rsync --list-only <USER@><IP>::
+```
+### List all files in Directory/Share 
+rsync --list-only <USER@><IP>::<SHARE>
+### Copy/Sync File
+rsync <USER@><IP>::<SHARE>/<FILE> <FILE>
+### List all 
+
 # MQTT (1883)
 Message Queuing Telemetry Transport 
 
@@ -291,3 +327,4 @@ $ nc <IP> <PORT>
 
 [^1]: dotguy. “Redeemer Write-Up.” Https://App.Hackthebox.Com/, Hack The Box, blob://app.hackthebox.com/d5cf9163-a224-4a41-aa5c-4bfff818c408. Accessed 18 Sept. 2024. 
 [^2]: "3389 - Pentesting RDP". Https://book.hacktricks.xyz/, HackTricks, https://book.hacktricks.xyz/network-services-pentesting/pentesting-rdp. Accessed 18 Sept. 2024.
+[^3]: amra. “Synced Write-Up.” Https://App.Hackthebox.Com/, Hack The Box, blob://app.hackthebox.com/3947d501-c875-4759-8a43-85dd72f215e3. Accessed 18 Sept. 2024.
