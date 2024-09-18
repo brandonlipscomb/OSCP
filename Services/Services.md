@@ -216,7 +216,28 @@ keys *
 ```redis-cli
 get <KEY NAME>
 ```
-
+# MongoDB (27017)
+MongoDB is a leading open-source NoSQL database that utilizes a document-oriented data model, allowing for the storage of data in flexible, JSON-like documents known as BSON. This flexibility enables developers to work with dynamic schemas, making it easy to adapt to changing application requirements without the constraints of traditional relational databases. With its powerful query language, rich indexing capabilities, and robust aggregation framework, MongoDB supports complex data operations and efficient data retrieval. It is designed for scalability and high availability, offering features such as horizontal sharding and replica sets to ensure data redundancy and reliability. Commonly used in applications ranging from content management systems to real-time analytics and e-commerce platforms, MongoDB is favored for its performance and versatility in handling diverse data workloads.
+## Connection
+```bash
+mongo mongodb://IP:PORT
+```
+## Show Databases 
+```mongo
+show dbs
+```
+## Select Datbase
+```mongo
+show <DATABASE>
+```
+## Show Collections in Current Database
+```mongo
+show collections
+```
+## Dump Contents of Collection
+```mongo
+ db.<COLLECTION>.find().pretty();
+```
 # STOMP (61613, 61616)
 Streaming Text Oriented Messaging Protocol
 
