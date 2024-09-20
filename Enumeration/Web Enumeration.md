@@ -1,4 +1,9 @@
 # Web Enumeration
+## Nikto
+Scan Web Server for Known Vulnerabilities
+```bash
+nikto -host http://DOMAIN/
+```
 ## Gobuster
 ### Directory Scan
 #### Initial Scan
