@@ -65,6 +65,10 @@ Attempt to Bold Text
 ```form
 <b>TITLE/USERNAME</b>
 ```
+Alert
+```form
+<script>alert(0)</script>
+```
 ### Check if there is a User-Agent 
 Set up Listener on Attacking Machine
 ```bash
