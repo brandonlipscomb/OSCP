@@ -24,6 +24,10 @@ $ ftp <USER>@<IP>
 vsftpd 2.3.4 
 - CVE-2011-2523 -> exploit/unix/ftp/vsftpd_234_backdoor (Metasploit)
 	- Backdoor on port 6200
+Upload a reverse shell
+```ftp
+put shell.php
+```
 
 # SSH (22)
 ## General 
