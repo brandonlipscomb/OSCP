@@ -203,6 +203,23 @@ You can exploit this vulnerability using Metasploit:
 ```bash
 use exploit/unix/misc/distcc_exec
 ```
+# Postgresql (5432,5433)
+An open source object-relational database system. This is a versatile system that builds upon the SQL language.
+## Connection
+```bash
+psql -h localhost -p 9001 -U christine
+```
+## Commands 
+- \l: list databases
+>[!NOTE]
+> If you find a database called **rdsadmin** you know you are inside an AWS postgresql database
+- \c <DATABASE>: use database 
+- \d: list tables in current database
+- \du+: get users roles
+Displays all fields from database
+```bash
+SELECT * FROM <DATBASE>: 
+```
 # AMQP (5672)
 Advanced Message Queuing Protocol
 
