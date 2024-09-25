@@ -63,8 +63,9 @@ Direct SMB over TCP
 $ smbmap -H <IP>
 ```
 ```bash
-$ smbclient -L \\<IP>
+$ smbclient -L -N \\<IP>
 ```
+- \-N: No Password
 ## SMB Common Shares
 - **ADMIN$**: Administrative shares are hidden network shares created by the Windows NT family of 
 operating systems that allow system administrators to have remote access to every disk volume on a 
