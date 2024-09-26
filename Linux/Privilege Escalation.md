@@ -1,7 +1,7 @@
 # Important Files
 ## Passwords
 If foothold was through a webserver:
-- Check all .php files in /login for hard coded passwords
+- Check all .php files in /var/www/html/.../<login> for hard coded passwords
 ```bash
 cat * | grep -i passw*
 ```
