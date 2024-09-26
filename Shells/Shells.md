@@ -48,6 +48,7 @@ export TERM=xterm
 ```
 3.
 CTRL+Z
+
 4.
 ```bash
 stty raw -echo; fg
