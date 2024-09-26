@@ -9,7 +9,7 @@ file */{.,}*
 ```bash
 find / -name "<name>" 2>/dev/null
 ```
-### Ex. Flags
+#### Ex. Flags
 ```bash
 find / -name "*flag*" 2>/dev/null
 ```
@@ -19,6 +19,10 @@ find / -perm -4000 -user root -type f 2>/dev/null
 ```
 ```bash
 find / -perm -u=s -type f 2>/dev/null
+```
+### Group
+```bash
+find / -group <GROUP> 2>/dev/null
 ```
 ### Finding the string password in log files
 ```bash
