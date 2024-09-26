@@ -24,3 +24,8 @@ gobuster vhost -w /usr/share/wordlists/SecLists/Discovery/DNS/subdomains-top1mil
 ```
 >[!NOTE]
 >Any subdomains that are found will need to be added to /etc/hosts before they can be reached
+
+## Burp Suite 
+1. Turn on FoxyProxy
+2. Load Web Page
+3. Go to Target Section on Burp Suite
