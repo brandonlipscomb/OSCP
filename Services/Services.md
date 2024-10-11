@@ -190,6 +190,16 @@ msf> use exploit/windows/mssql/mssql_payload #Uploads and execute a payload
 msf> use windows/manage/mssql_local_auth_bypass
 ```
 ## Manual Enumeration
+### List All Shares on a Server Running SMB
+```bash
+smbclient -L IP [-U USER]
+```
+>[!NOTE]
+>'$': Dictates Administrator Shares
+### Access and Interact with a Given Share
+```bash
+smclient //IP/SHARE
+```
 ### Login
 MSSQLPwner
 ```bash
